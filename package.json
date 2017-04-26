@@ -1,0 +1,36 @@
+{
+  "name": "database-manager",
+  "version": "0.0.0",
+  "description": "Database manager",
+  "license": "MIT",
+  "repository": "iguntur/database-manager",
+  "author": {
+    "name": "Guntur Poetra",
+    "email": "poetra.guntur@gmail.com",
+    "url": "http://iguntur.starmediateknik.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "tsc && ava",
+    "clean": "rm -rf ./dist/*",
+    "build": "npm run clean && tsc"
+  },
+  "files": [
+    "index.js",
+    "dist",
+    "types"
+  ],
+  "keywords": [],
+  "typings": "types/index.d.ts",
+  "devDependencies": {
+    "@types/node": "*",
+    "ava": "*",
+    "prop-env": "*",
+    "typescript": "*"
+  },
+  "xo": {
+    "esnext": true
+  }
+}

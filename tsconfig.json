@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"pretty": true,
+		"sourceMap": false,
+		"noImplicitAny": false,
+		"removeComments": false,
+		"allowSyntheticDefaultImports": true,
+		"module": "none",
+		"target": "es2015",
+		"outDir": "./dist",
+		"moduleResolution": "node"
+	},
+	"include": [
+		"src/**/*.ts",
+		"types/index.d.ts"
+	]
+}
