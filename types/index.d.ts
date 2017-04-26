@@ -26,12 +26,6 @@ type TableOptions = {
 	collate?: string;
 }
 
-interface SchemaInterface {
-	create: (table: string, callable: Function) => void;
-	drop: (table: string) => void;
-	dropIfExist: (table: string) => void;
-}
-
 interface QueryBuilderInterface {
 	raw: (query: string) => QueryBuilderInterface;
 	createTable: (table: string) => QueryBuilderInterface;
@@ -43,6 +37,12 @@ interface QueryBuilderInterface {
 	string: (field: string, size?: number) => QueryBuilderInterface;
 	integer: (field: string, size?: number) => QueryBuilderInterface;
 	timestamp: (field?: 'created_at' | 'updated_at') => void;
+}
+
+interface SchemaInterface {
+	create: (table: string, callable: (Blueprint: QueryBuilderInterface) => void) => void;
+	drop: (table: string) => void;
+	dropIfExist: (table: string) => void;
 }
 
 interface DatabaseManagerInterface {
