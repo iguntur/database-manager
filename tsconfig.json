@@ -4,6 +4,7 @@
 		"sourceMap": false,
 		"noImplicitAny": false,
 		"removeComments": false,
+		"strictNullChecks": true,
 		"allowSyntheticDefaultImports": true,
 		"module": "none",
 		"target": "es2015",
