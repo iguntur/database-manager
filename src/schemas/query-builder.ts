@@ -1,48 +1,29 @@
-class QueryBuilder implements QueryBuilderInterface {
+abstract class QueryBuilder implements QueryBuilderInterface {
 	/**
 	 * The connection options.
 	 *
-	 * @type {ConnectionOptions}
+	 * @type {object}
 	 */
-	protected connections: ConnectionOptions;
+	protected abstract connections: ConnectionOptions;
 
 	/**
-	 * The field name.
+	 * The querie collections.
 	 *
-	 * @type {string}
+	 * @type {Array<string>}
 	 */
-	protected name: string;
-
-	/**
-	 * The structure options.
-	 *
-	 * @type {StructureOptions}
-	 */
-	protected options: StructureOptions;
-
-	public contextRaw: string[];
+	protected abstract queries: Array<string>;
 
 	/**
 	 * Create a new QueryBuilder instance.
 	 *
-	 * @param  {ConnectionOptions} connections
-	 * @return {QueryBuilder}
+	 * @return {void}
 	 */
-	constructor(connections: ConnectionOptions) {
-		this.connections = connections;
+	constructor() {
+		const self = this.constructor;
 
-		this.contextRaw = [];
-
-		this.options = Object.assign({
-			type: 'INT',
-			size: null,
-			extra: false,
-			attributes: null,
-			nullable: 'NOT NULL',
-			index: null,
-			primary: null,
-			foreign: null
-		});
+		if (self === QueryBuilder) {
+			throw new Error(`Cannot create an instance of the abstract class '${self.name}'.`)
+		}
 	}
 
 	/**
@@ -52,7 +33,7 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {string}
 	 */
 	public raw(queryString: string): this {
-		this.contextRaw.push(queryString);
+		this.queries.push(queryString);
 
 		return this;
 	}
@@ -82,7 +63,7 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @param  {string} field
 	 * @return {this}
 	 */
-	public addColumn(field: string): this {
+	public addColumn(type: string, field: string): this {
 		return this;
 	}
 
@@ -105,115 +86,6 @@ class QueryBuilder implements QueryBuilderInterface {
 	public modifyColumn(field: string): this {
 		return this;
 	}
-
-	/**
-	 * Set row option give the key and value.
-	 *
-	 * @param {string} key
-	 * @param {any}    value
-	 */
-	public set(key: string, value: any): void {
-		this.options[key] = value;
-	}
-
-	/**
-	 * Get the row option.
-	 *
-	 * @param  {string} key
-	 * @return {any}
-	 */
-	public get(key: string): any {
-		const value = this.options[key];
-
-		if (typeof value === 'function') {
-			return value();
-		}
-
-		return value ? value : undefined;
-	}
-
-	/**
-	 * Set the current row as the primary key.
-	 *
-	 * @return {QueryBuilder}
-	 */
-	public primary(): this {
-		this.set('primary', this.name);
-
-		return this;
-	}
-
-	/**
-	 * Set the current row as the auto increment.
-	 *
-	 * @return {QueryBuilder}
-	 */
-	public increment(): this {
-		this.set('extra', 'AUTO_INCREMENT');
-
-		return this;
-	}
-
-	/**
-	 * Set the length/value current row.
-	 *
-	 * @param  {number} value
-	 * @return {QueryBuilder}
-	 */
-	public size(value): this {
-		this.set('size', value || null);
-
-		return this;
-	}
-
-	/**
-	 * Set the current row as the 'INT' type.
-	 *
-	 * @param  {number} size
-	 * @return {QueryBuilder}
-	 */
-	public integer(size): this {
-		this.size(size);
-
-		this.set('type', `INT`);
-
-		return this;
-	}
-
-	/**
-	 * Set the current row as the 'VARCHAR' type.
-	 *
-	 * @param  {number} size
-	 * @return {QueryBuilder}
-	 */
-	public string(size): this {
-		this.size(size);
-
-		this.set('type', `VARCHAR`);
-
-		return this;
-	}
-
-	/**
-	 * Set the current row can be 'NULL' value.
-	 *
-	 * @return {QueryBuilder}
-	 */
-	public nullable(): this {
-		this.set('nullable', 'NULL');
-
-		return this;
-	}
-
-	/**
-	 * Create field as the 'DATE' type.
-	 *
-	 * @param  {string} field
-	 * @return {void}
-	 */
-	public timestamp(field?: 'created_at' | 'updated_at'): void {
-		//
-	}
 }
 
-export default module.exports = QueryBuilder;
+export default QueryBuilder;

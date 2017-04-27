@@ -1,5 +1,5 @@
 import Schema from './schemas/schema';
-import QueryBuilder from './schemas/query-builder';
+import Blueprint from './schemas/blueprint';
 
 class DatabaseManager implements DatabaseManagerInterface {
 	/**
@@ -61,8 +61,8 @@ class DatabaseManager implements DatabaseManagerInterface {
 	 * @returns {Schema}
 	 */
 	public schema(): SchemaInterface {
-		return new Schema(new QueryBuilder(this.connection));
+		return new Schema(new Blueprint(this.getConnection()));
 	}
 }
 
-export default module.exports = DatabaseManager;
+export default DatabaseManager;

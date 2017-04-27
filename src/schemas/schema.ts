@@ -2,18 +2,18 @@ class Schema implements SchemaInterface {
 	/**
 	 * The query builder instance.
 	 *
-	 * @type {QueryBuilderInterface}
+	 * @type {SchemaBuilderInterface}
 	 */
-	protected queryBuilder: QueryBuilderInterface;
+	protected builder: SchemaBuilderInterface;
 
 	/**
 	 * Create a new Schema instance.
 	 *
-	 * @param  {QueryBuilderInterface} queryBuilder
+	 * @param  {SchemaBuilderInterface} builder
 	 * @return {Schema}
 	 */
-	constructor(queryBuilder: QueryBuilderInterface) {
-		this.queryBuilder = queryBuilder;
+	constructor(builder: SchemaBuilderInterface) {
+		this.builder = builder;
 	}
 
 	/**
@@ -28,9 +28,9 @@ class Schema implements SchemaInterface {
 			throw new TypeError(`Expected 'table' to be of type 'string', got ${typeof table}`);
 		}
 
-		this.queryBuilder.createTable(table);
+		this.builder.createTable(table);
 
-		callable(this.queryBuilder);
+		callable(this.builder);
 	}
 
 	/**
@@ -54,4 +54,4 @@ class Schema implements SchemaInterface {
 	}
 }
 
-export default module.exports = Schema;
+export default Schema;
