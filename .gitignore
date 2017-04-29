@@ -1,3 +1,7 @@
 node_modules
 dist
 .env
+
+# code coverage
+coverage
+.nyc_output
