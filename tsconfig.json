@@ -6,7 +6,7 @@
 		"removeComments": false,
 		"strictNullChecks": true,
 		"allowSyntheticDefaultImports": true,
-		"module": "none",
+		"module": "commonjs",
 		"target": "es2015",
 		"outDir": "./dist",
 		"moduleResolution": "node"
