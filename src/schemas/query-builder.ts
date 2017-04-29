@@ -18,7 +18,7 @@ abstract class QueryBuilder implements QueryBuilderInterface {
 	 *
 	 * @return {void}
 	 */
-	constructor() {
+	public constructor() {
 		const self = this.constructor;
 
 		if (self === QueryBuilder) {

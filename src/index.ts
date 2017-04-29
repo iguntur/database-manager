@@ -14,7 +14,7 @@ class DatabaseManager implements DatabaseManagerInterface {
 	 *
 	 * @return {DatabaseManager}
 	 */
-	constructor() {
+	public constructor() {
 		this.connection = Object.create(null);
 	}
 

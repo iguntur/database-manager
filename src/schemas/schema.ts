@@ -12,7 +12,7 @@ class Schema implements SchemaInterface {
 	 * @param  {SchemaBuilderInterface} builder
 	 * @return {Schema}
 	 */
-	constructor(builder: SchemaBuilderInterface) {
+	public constructor(builder: SchemaBuilderInterface) {
 		this.builder = builder;
 	}
 

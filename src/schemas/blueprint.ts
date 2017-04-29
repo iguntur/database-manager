@@ -20,7 +20,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 *
 	 * @param {object} connections
 	 */
-	constructor(connections: ConnectionOptions) {
+	public constructor(connections: ConnectionOptions) {
 		super();
 		this.connections = connections;
 		this.queries = [];
@@ -31,7 +31,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 *
 	 * @return {this}
 	 */
-	first(): this {
+	public first(): this {
 		return this;
 	}
 
@@ -40,7 +40,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 *
 	 * @return {this}
 	 */
-	last(): this {
+	public last(): this {
 		return this;
 	}
 
@@ -50,7 +50,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 * @param  {string} column
 	 * @return {this}
 	 */
-	after(column: string): this {
+	public after(column: string): this {
 		return this;
 	}
 
@@ -60,7 +60,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 * @param  {string} column
 	 * @return {this}
 	 */
-	before(column: string): this {
+	public before(column: string): this {
 		return this;
 	}
 
@@ -70,7 +70,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 * @param  {any}  value
 	 * @return {this}
 	 */
-	default(value: any): this {
+	public default(value: any): this {
 		return this;
 	}
 
@@ -79,7 +79,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 *
 	 * @return {this}
 	 */
-	nullable(): this {
+	public nullable(): this {
 		return this;
 	}
 
@@ -88,7 +88,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 *
 	 * @return {this}
 	 */
-	unsigned(): this {
+	public unsigned(): this {
 		return this;
 	}
 
@@ -98,7 +98,7 @@ class Blueprint extends QueryBuilder implements MigrationBaseInterface, Migratio
 	 * @param  {string} comment
 	 * @return {this}
 	 */
-	comment(comment: string): this {
+	public comment(comment: string): this {
 		return this;
 	}
 
