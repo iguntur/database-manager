@@ -32,7 +32,8 @@
     "coveralls": "*",
     "nyc": "*",
     "prop-env": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "xo": "*"
   },
   "xo": {
     "esnext": true
