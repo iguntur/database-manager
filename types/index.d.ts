@@ -61,8 +61,6 @@ interface SchemaInterface {
 	dropIfExist: (table: string) => void;
 }
 
-interface SchemaBuilderInterface extends QueryBuilderInterface {}
-
 interface DatabaseManagerInterface {
 	setConnection: (options: ConnectionOptions) => void;
 	hasConnection: (driver: string) => boolean;
