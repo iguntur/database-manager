@@ -55,6 +55,7 @@ interface MigrationBaseInterface {
 }
 
 interface SchemaInterface {
+	database: DatabaseManagerInterface;
 	create: (table: string, callable: (implement: MigrationBaseInterface) => void) => void;
 	drop: (table: string) => void;
 	dropIfExist: (table: string) => void;
