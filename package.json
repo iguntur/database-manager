@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "xo && tsc && nyc ava",
+    "test": "tsc && xo && nyc ava",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf ./dist/* ./coverage/* ./.nyc_output/*",
