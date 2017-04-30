@@ -1,19 +1,27 @@
+import DatabaseManager from '../';
+import QueryBuilder from './query-builder';
+import Migrator from './migrator';
+
 class Schema implements SchemaInterface {
 	/**
-	 * The query builder instance.
+	 * The database manager instance;
 	 *
-	 * @type {SchemaBuilderInterface}
+	 * @type {DatabaseManager}
 	 */
-	protected builder: SchemaBuilderInterface;
+	public database: DatabaseManager;
 
 	/**
 	 * Create a new Schema instance.
 	 *
-	 * @param  {SchemaBuilderInterface} builder
+	 * @param  {DatabaseManager} database
 	 * @return {Schema}
 	 */
-	public constructor(builder: SchemaBuilderInterface) {
-		this.builder = builder;
+	public constructor(database: DatabaseManager) {
+		if (! (database instanceof DatabaseManager)) {
+			throw new TypeError('class Schema require DatabaseManager interface');
+		}
+
+		this.database = database;
 	}
 
 	/**
@@ -23,14 +31,20 @@ class Schema implements SchemaInterface {
 	 * @param  {Function} callable
 	 * @return {void}
 	 */
-	public create(table: string, callable: Function): void {
+	public create(table: string, callable: (implement: Migrator) => void): void {
 		if (typeof table !== 'string') {
-			throw new TypeError(`Expected 'table' to be of type 'string', got ${typeof table}`);
+			throw new TypeError(`Expected 'table' to of type 'string', got ${typeof table}`);
 		}
 
-		this.builder.createTable(table);
+		if (typeof callable !== 'function') {
+			throw new TypeError(`Expected 'callable' to of type 'function', got ${typeof callable}`);
+		}
 
-		callable(this.builder);
+		const queryBuilder = new QueryBuilder(this);
+
+		queryBuilder.createTable(table);
+
+		return callable(new Migrator(queryBuilder));
 	}
 
 	/**

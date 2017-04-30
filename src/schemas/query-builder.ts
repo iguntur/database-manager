@@ -1,29 +1,46 @@
-abstract class QueryBuilder implements QueryBuilderInterface {
+import Schema from './schema';
+
+class QueryBuilder implements QueryBuilderInterface {
 	/**
-	 * The connection options.
+	 * The database schema options.
 	 *
 	 * @type {object}
 	 */
-	protected abstract connections: ConnectionOptions;
+	protected schema: SchemaInterface;
 
 	/**
 	 * The querie collections.
 	 *
 	 * @type {Array<string>}
 	 */
-	protected abstract queries: Array<string>;
+	protected queries: Array<string>;
 
 	/**
 	 * Create a new QueryBuilder instance.
 	 *
 	 * @return {void}
 	 */
-	public constructor() {
-		const self = this.constructor;
+	public constructor(schema: Schema) {
+		this.schema = schema;
+		this.queries = [];
+	}
 
-		if (self === QueryBuilder) {
-			throw new Error(`Cannot create an instance of the abstract class '${self.name}'.`)
-		}
+	/**
+	 * Get the connection options.
+	 *
+	 * @return {ConnectionOptions}
+	 */
+	protected getConnection(): ConnectionOptions {
+		return this.schema.database.getConnection();
+	}
+
+	/**
+	 * Get the database name.
+	 *
+	 * @return {string}
+	 */
+	protected getDatabaseName(): string {
+		return this.getConnection().database;
 	}
 
 	/**
@@ -45,7 +62,9 @@ abstract class QueryBuilder implements QueryBuilderInterface {
 	 * @return {QueryBuilder}
 	 */
 	public createTable(table: string): this {
-		return this.raw(`CREATE TABLE \`${this.connections.database}\`.\`${table}\``);
+		const database = this.getDatabaseName();
+
+		return this.raw(`CREATE TABLE \`${database}\`.\`${table}\``);
 	}
 
 	/**

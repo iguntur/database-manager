@@ -1,5 +1,4 @@
 import Schema from './schemas/schema';
-import Blueprint from './schemas/blueprint';
 
 class DatabaseManager implements DatabaseManagerInterface {
 	/**
@@ -61,7 +60,13 @@ class DatabaseManager implements DatabaseManagerInterface {
 	 * @returns {Schema}
 	 */
 	public schema(): SchemaInterface {
-		return new Schema(new Blueprint(this.getConnection()));
+		const size = Object.keys(this.connection).length;
+
+		if (! size) {
+			throw new Error('No connection was provided');
+		}
+
+		return new Schema(this);
 	}
 }
 
