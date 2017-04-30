@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/node": "*",
     "ava": "*",
+    "coveralls": "*",
     "nyc": "*",
     "prop-env": "*",
     "typescript": "*"
