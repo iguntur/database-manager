@@ -13,8 +13,10 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "tsc && ava",
-    "clean": "rm -rf ./dist/*",
+    "test": "tsc && nyc ava",
+    "report": "nyc report --reporter=html",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "clean": "rm -rf ./dist/* ./coverage/* ./.nyc_output/*",
     "build": "npm run clean && tsc"
   },
   "files": [
