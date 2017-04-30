@@ -12,4 +12,4 @@ module.exports = {
 		collation: env('DB_COLLATE', 'utf8_unicode_ci'),
 		prefix: env('DB_PREFIX', '')
 	}
-}
+};

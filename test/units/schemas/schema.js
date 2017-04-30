@@ -6,7 +6,10 @@ test('throws - Error missing database', t => {
 	const messages = 'class Schema require DatabaseManager interface';
 	t.throws(() => new Schema(), messages);
 	t.throws(() => new Schema(Object), messages);
-	t.throws(() => new Schema(new Object), messages);
+	t.throws(() => new Schema(new Object()), messages); // eslint-disable-line no-new-object
+
+	class Foo {}
+	t.throws(() => new Schema(new Foo()), messages);
 });
 
 test('not throws instance Schema class', t => {
@@ -23,12 +26,12 @@ test('throws an exception - create a new schema', t => {
 test('not throws an exception - create a new schema', t => {
 	const schema = new Schema(new DB());
 	t.notThrows(() => {
-		// function keyword
-		schema.create('foo', function () {});
+		// Function keyword
+		schema.create('foo', function () {}); // eslint-disable-line prefer-arrow-callback
 	});
 
 	t.notThrows(() => {
-		// arrow function
+		// Arrow function
 		schema.create('bar', () => {});
 	});
 });
