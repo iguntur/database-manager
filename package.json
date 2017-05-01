@@ -13,11 +13,12 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "tsc && xo && nyc ava",
-    "report": "nyc report --reporter=html",
+    "lint": "xo",
+    "test": "tsc && npm run lint && nyc ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rm -rf ./dist/* ./coverage/* ./.nyc_output/*",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    "report": "npm run build && nyc ava && nyc report --reporter=html"
   },
   "files": [
     "index.js",
