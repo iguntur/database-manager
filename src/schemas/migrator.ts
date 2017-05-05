@@ -1,5 +1,3 @@
-import QueryBuilder from './query-builder';
-
 class Migrator implements MigrationBaseInterface {
 	/**
 	 * The query builder instance.
@@ -13,11 +11,7 @@ class Migrator implements MigrationBaseInterface {
 	 *
 	 * @param {object} query
 	 */
-	public constructor(query: QueryBuilder) {
-		if (! (query instanceof QueryBuilder)) {
-			throw new TypeError('Should `query` arguments must be `instanceof QueryBuilder`');
-		}
-
+	public constructor(query: QueryBuilderInterface) {
 		this.query = query;
 	}
 
@@ -27,7 +21,7 @@ class Migrator implements MigrationBaseInterface {
 	 * @return {QueryBuilder}
 	 */
 	public primary(field: string): this {
-		// this.query.addColumn('', '').
+		this.query.addColumn('INT', field);
 
 		return this;
 	}

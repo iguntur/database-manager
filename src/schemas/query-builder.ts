@@ -1,4 +1,4 @@
-import Schema from './schema';
+import * as vType from 'v-type';
 
 class QueryBuilder implements QueryBuilderInterface {
 	/**
@@ -9,20 +9,20 @@ class QueryBuilder implements QueryBuilderInterface {
 	protected schema: SchemaInterface;
 
 	/**
-	 * The querie collections.
+	 * The statements collections.
 	 *
 	 * @type {Array<string>}
 	 */
-	protected queries: Array<string>;
+	protected statements: Array<string>;
 
 	/**
 	 * Create a new QueryBuilder instance.
 	 *
 	 * @return {void}
 	 */
-	public constructor(schema: Schema) {
+	public constructor(schema: SchemaInterface) {
 		this.schema = schema;
-		this.queries = [];
+		this.statements = [];
 	}
 
 	/**
@@ -50,7 +50,9 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {string}
 	 */
 	public raw(queryString: string): this {
-		this.queries.push(queryString);
+		vType(queryString, String);
+
+		this.statements.push(queryString);
 
 		return this;
 	}
@@ -62,6 +64,8 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {QueryBuilder}
 	 */
 	public createTable(table: string): this {
+		vType(table, String);
+
 		const database = this.getDatabaseName();
 
 		return this.raw(`CREATE TABLE \`${database}\`.\`${table}\``);
@@ -83,6 +87,9 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {this}
 	 */
 	public addColumn(type: string, field: string): this {
+		vType(type, String);
+		vType(field, String);
+
 		return this;
 	}
 
@@ -93,6 +100,8 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {this}
 	 */
 	public dropColumn(field: string): this {
+		vType(field, String);
+
 		return this;
 	}
 
@@ -103,6 +112,8 @@ class QueryBuilder implements QueryBuilderInterface {
 	 * @return {this}
 	 */
 	public modifyColumn(field: string): this {
+		vType(field, String);
+
 		return this;
 	}
 }

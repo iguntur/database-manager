@@ -1,4 +1,4 @@
-import DatabaseManager from '../';
+import * as vType from 'v-type';
 import QueryBuilder from './query-builder';
 import Migrator from './migrator';
 
@@ -8,7 +8,7 @@ class Schema implements SchemaInterface {
 	 *
 	 * @type {DatabaseManager}
 	 */
-	public database: DatabaseManager;
+	public database: DatabaseManagerInterface;
 
 	/**
 	 * Create a new Schema instance.
@@ -16,11 +16,7 @@ class Schema implements SchemaInterface {
 	 * @param  {DatabaseManager} database
 	 * @return {Schema}
 	 */
-	public constructor(database: DatabaseManager) {
-		if (! (database instanceof DatabaseManager)) {
-			throw new TypeError('class Schema require DatabaseManager interface');
-		}
-
+	public constructor(database: DatabaseManagerInterface) {
 		this.database = database;
 	}
 
@@ -32,13 +28,8 @@ class Schema implements SchemaInterface {
 	 * @return {void}
 	 */
 	public create(table: string, callable: (implement: Migrator) => void): void {
-		if (typeof table !== 'string') {
-			throw new TypeError(`Expected 'table' to of type 'string', got ${typeof table}`);
-		}
-
-		if (typeof callable !== 'function') {
-			throw new TypeError(`Expected 'callable' to of type 'function', got ${typeof callable}`);
-		}
+		vType(table, String);
+		vType(callable, Function);
 
 		const queryBuilder = new QueryBuilder(this);
 
@@ -54,7 +45,7 @@ class Schema implements SchemaInterface {
 	 * @return {void}
 	 */
 	public drop(table: string): void {
-		//
+		vType(table, String);
 	}
 
 	/**
@@ -64,7 +55,7 @@ class Schema implements SchemaInterface {
 	 * @return {void}
 	 */
 	public dropIfExist(table: string): void {
-		//
+		vType(table, String);
 	}
 }
 
