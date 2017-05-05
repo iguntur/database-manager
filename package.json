@@ -27,6 +27,9 @@
   ],
   "keywords": [],
   "typings": "types/index.d.ts",
+  "dependencies": {
+    "v-type": "*"
+  },
   "devDependencies": {
     "@types/node": "*",
     "ava": "*",
